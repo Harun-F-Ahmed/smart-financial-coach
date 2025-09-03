@@ -1,0 +1,220 @@
+date,amount,merchant,category,account_id,description
+2024-01-01,-4.25,Dunkin,Coffee,acc_001,Coffee purchase
+2024-01-01,-5.5,Dunkin,Coffee,acc_001,Coffee purchase
+2024-01-01,-12,Uber,Rideshare,acc_001,Weekend ride
+2024-01-02,1800,Employer,Income,acc_001,Salary deposit
+2024-01-02,-3.5,Starbucks,Coffee,acc_001,Coffee purchase
+2024-01-02,-4.25,Starbucks,Coffee,acc_001,Coffee purchase
+2024-01-04,-4.25,Dunkin,Coffee,acc_001,Coffee purchase
+2024-01-05,-4.25,Dunkin,Coffee,acc_001,Coffee purchase
+2024-01-06,-3.5,Dunkin,Coffee,acc_001,Coffee purchase
+2024-01-06,-4.25,Starbucks,Coffee,acc_001,Coffee purchase
+2024-01-06,-32,Chipotle,Restaurants,acc_001,Friday dinner
+2024-01-07,-18,Lyft,Rideshare,acc_001,Weekend ride
+2024-01-08,-4.25,Dunkin,Coffee,acc_001,Coffee purchase
+2024-01-08,-30,Uber,Rideshare,acc_001,Weekend ride
+2024-01-08,-120,Whole Foods,Groceries,acc_001,Grocery shopping
+2024-01-09,-4.25,Starbucks,Coffee,acc_001,Coffee purchase
+2024-01-09,-4.25,Dunkin,Coffee,acc_001,Coffee purchase
+2024-01-10,-3.5,Dunkin,Coffee,acc_001,Coffee purchase
+2024-01-11,-3.5,Local Coffee,Coffee,acc_001,Coffee purchase
+2024-01-11,-120,Whole Foods,Groceries,acc_001,Grocery shopping
+2024-01-12,-5.5,Dunkin,Coffee,acc_001,Coffee purchase
+2024-01-12,-5.5,Local Coffee,Coffee,acc_001,Coffee purchase
+2024-01-13,-32,Chipotle,Restaurants,acc_001,Friday dinner
+2024-01-14,-3.5,Local Coffee,Coffee,acc_001,Coffee purchase
+2024-01-14,-4.25,Starbucks,Coffee,acc_001,Coffee purchase
+2024-01-14,-12,Lyft,Rideshare,acc_001,Weekend ride
+2024-01-15,-3.5,Dunkin,Coffee,acc_001,Coffee purchase
+2024-01-15,-3.5,Starbucks,Coffee,acc_001,Coffee purchase
+2024-01-15,-18,Lyft,Rideshare,acc_001,Weekend ride
+2024-01-15,-55,Whole Foods,Groceries,acc_001,Grocery shopping
+2024-01-16,1800,Employer,Income,acc_001,Salary deposit
+2024-01-16,-15.99,Netflix,Subscriptions,acc_001,Monthly subscription
+2024-01-16,-10.99,Spotify,Subscriptions,acc_001,Monthly subscription
+2024-01-16,-2.99,Apple iCloud,Subscriptions,acc_001,Monthly subscription
+2024-01-16,-4.25,Dunkin,Coffee,acc_001,Coffee purchase
+2024-01-17,-15.99,Netflix,Subscriptions,acc_001,Monthly subscription
+2024-01-17,-10.99,Spotify,Subscriptions,acc_001,Monthly subscription
+2024-01-17,-2.99,Apple iCloud,Subscriptions,acc_001,Monthly subscription
+2024-01-18,-15.99,Netflix,Subscriptions,acc_001,Monthly subscription
+2024-01-18,-10.99,Spotify,Subscriptions,acc_001,Monthly subscription
+2024-01-18,-2.99,Apple iCloud,Subscriptions,acc_001,Monthly subscription
+2024-01-19,-15.99,Netflix,Subscriptions,acc_001,Monthly subscription
+2024-01-19,-10.99,Spotify,Subscriptions,acc_001,Monthly subscription
+2024-01-19,-2.99,Apple iCloud,Subscriptions,acc_001,Monthly subscription
+2024-01-19,-5.5,Starbucks,Coffee,acc_001,Coffee purchase
+2024-01-20,-15.99,Netflix,Subscriptions,acc_001,Monthly subscription
+2024-01-20,-10.99,Spotify,Subscriptions,acc_001,Monthly subscription
+2024-01-20,-2.99,Apple iCloud,Subscriptions,acc_001,Monthly subscription
+2024-01-20,-5.5,Dunkin,Coffee,acc_001,Coffee purchase
+2024-01-20,-5.5,Starbucks,Coffee,acc_001,Coffee purchase
+2024-01-20,-60,Chipotle,Restaurants,acc_001,Friday dinner
+2024-01-21,-15.99,Netflix,Subscriptions,acc_001,Monthly subscription
+2024-01-21,-10.99,Spotify,Subscriptions,acc_001,Monthly subscription
+2024-01-21,-2.99,Apple iCloud,Subscriptions,acc_001,Monthly subscription
+2024-01-21,-5.5,Dunkin,Coffee,acc_001,Coffee purchase
+2024-01-21,-30,Uber,Rideshare,acc_001,Weekend ride
+2024-01-21,-55,Whole Foods,Groceries,acc_001,Grocery shopping
+2024-01-22,-4.25,Dunkin,Coffee,acc_001,Coffee purchase
+2024-01-22,-55,Whole Foods,Groceries,acc_001,Grocery shopping
+2024-01-23,-5.5,Starbucks,Coffee,acc_001,Coffee purchase
+2024-01-24,-5.5,Local Coffee,Coffee,acc_001,Coffee purchase
+2024-01-24,-4.25,Local Coffee,Coffee,acc_001,Coffee purchase
+2024-01-25,-4.25,Local Coffee,Coffee,acc_001,Coffee purchase
+2024-01-25,-3.5,Dunkin,Coffee,acc_001,Coffee purchase
+2024-01-26,-3.5,Local Coffee,Coffee,acc_001,Coffee purchase
+2024-01-27,-4.25,Local Coffee,Coffee,acc_001,Coffee purchase
+2024-01-27,-25,Local Bistro,Restaurants,acc_001,Friday dinner
+2024-01-28,-5.5,Dunkin,Coffee,acc_001,Coffee purchase
+2024-01-28,-30,Lyft,Rideshare,acc_001,Weekend ride
+2024-01-29,-3.5,Dunkin,Coffee,acc_001,Coffee purchase
+2024-01-29,-12,Uber,Rideshare,acc_001,Weekend ride
+2024-01-29,-96,Whole Foods,Groceries,acc_001,Grocery shopping
+2024-01-31,-4.25,Local Coffee,Coffee,acc_001,Coffee purchase
+2024-01-31,-72,Whole Foods,Groceries,acc_001,Grocery shopping
+2024-02-01,-5.5,Dunkin,Coffee,acc_001,Coffee purchase
+2024-02-01,-4.25,Starbucks,Coffee,acc_001,Coffee purchase
+2024-02-02,1800,Employer,Income,acc_001,Salary deposit
+2024-02-02,-4.25,Local Coffee,Coffee,acc_001,Coffee purchase
+2024-02-03,-5.5,Local Coffee,Coffee,acc_001,Coffee purchase
+2024-02-04,-5.5,Dunkin,Coffee,acc_001,Coffee purchase
+2024-02-04,-18,Lyft,Rideshare,acc_001,Weekend ride
+2024-02-05,-3.5,Local Coffee,Coffee,acc_001,Coffee purchase
+2024-02-05,-12,Lyft,Rideshare,acc_001,Weekend ride
+2024-02-06,-4.25,Local Coffee,Coffee,acc_001,Coffee purchase
+2024-02-07,-4.25,Local Coffee,Coffee,acc_001,Coffee purchase
+2024-02-07,-5.5,Local Coffee,Coffee,acc_001,Coffee purchase
+2024-02-08,-4.25,Starbucks,Coffee,acc_001,Coffee purchase
+2024-02-08,-72,Whole Foods,Groceries,acc_001,Grocery shopping
+2024-02-09,-4.25,Local Coffee,Coffee,acc_001,Coffee purchase
+2024-02-10,-3.5,Local Coffee,Coffee,acc_001,Coffee purchase
+2024-02-10,-60,Local Bistro,Restaurants,acc_001,Friday dinner
+2024-02-11,-4.25,Dunkin,Coffee,acc_001,Coffee purchase
+2024-02-11,-12,Uber,Rideshare,acc_001,Weekend ride
+2024-02-11,-72,Whole Foods,Groceries,acc_001,Grocery shopping
+2024-02-12,-4.25,Local Coffee,Coffee,acc_001,Coffee purchase
+2024-02-12,-5.5,Local Coffee,Coffee,acc_001,Coffee purchase
+2024-02-12,-12,Uber,Rideshare,acc_001,Weekend ride
+2024-02-13,-5.5,Dunkin,Coffee,acc_001,Coffee purchase
+2024-02-13,-4.25,Starbucks,Coffee,acc_001,Coffee purchase
+2024-02-14,-4.25,Local Coffee,Coffee,acc_001,Coffee purchase
+2024-02-15,-5.5,Dunkin,Coffee,acc_001,Coffee purchase
+2024-02-15,-55,Whole Foods,Groceries,acc_001,Grocery shopping
+2024-02-15,-210,Fancy Restaurant,Restaurants,acc_001,Birthday dinner celebration
+2024-02-16,1800,Employer,Income,acc_001,Salary deposit
+2024-02-16,-15.99,Netflix,Subscriptions,acc_001,Monthly subscription
+2024-02-16,-10.99,Spotify,Subscriptions,acc_001,Monthly subscription
+2024-02-16,-2.99,Apple iCloud,Subscriptions,acc_001,Monthly subscription
+2024-02-16,-5.5,Starbucks,Coffee,acc_001,Coffee purchase
+2024-02-16,-4.25,Starbucks,Coffee,acc_001,Coffee purchase
+2024-02-17,-15.99,Netflix,Subscriptions,acc_001,Monthly subscription
+2024-02-17,-10.99,Spotify,Subscriptions,acc_001,Monthly subscription
+2024-02-17,-2.99,Apple iCloud,Subscriptions,acc_001,Monthly subscription
+2024-02-17,-5.5,Local Coffee,Coffee,acc_001,Coffee purchase
+2024-02-17,-4.25,Dunkin,Coffee,acc_001,Coffee purchase
+2024-02-17,-45,Chipotle,Restaurants,acc_001,Friday dinner
+2024-02-18,-15.99,Netflix,Subscriptions,acc_001,Monthly subscription
+2024-02-18,-10.99,Spotify,Subscriptions,acc_001,Monthly subscription
+2024-02-18,-2.99,Apple iCloud,Subscriptions,acc_001,Monthly subscription
+2024-02-18,-3.5,Local Coffee,Coffee,acc_001,Coffee purchase
+2024-02-18,-24,Uber,Rideshare,acc_001,Weekend ride
+2024-02-19,-15.99,Netflix,Subscriptions,acc_001,Monthly subscription
+2024-02-19,-10.99,Spotify,Subscriptions,acc_001,Monthly subscription
+2024-02-19,-2.99,Apple iCloud,Subscriptions,acc_001,Monthly subscription
+2024-02-19,-4.25,Dunkin,Coffee,acc_001,Coffee purchase
+2024-02-19,-30,Lyft,Rideshare,acc_001,Weekend ride
+2024-02-20,-15.99,Netflix,Subscriptions,acc_001,Monthly subscription
+2024-02-20,-10.99,Spotify,Subscriptions,acc_001,Monthly subscription
+2024-02-20,-2.99,Apple iCloud,Subscriptions,acc_001,Monthly subscription
+2024-02-21,-15.99,Netflix,Subscriptions,acc_001,Monthly subscription
+2024-02-21,-10.99,Spotify,Subscriptions,acc_001,Monthly subscription
+2024-02-21,-2.99,Apple iCloud,Subscriptions,acc_001,Monthly subscription
+2024-02-21,-5.5,Dunkin,Coffee,acc_001,Coffee purchase
+2024-02-21,-4.25,Local Coffee,Coffee,acc_001,Coffee purchase
+2024-02-21,-96,Whole Foods,Groceries,acc_001,Grocery shopping
+2024-02-22,-120,Whole Foods,Groceries,acc_001,Grocery shopping
+2024-02-23,-3.5,Local Coffee,Coffee,acc_001,Coffee purchase
+2024-02-23,-5.5,Dunkin,Coffee,acc_001,Coffee purchase
+2024-02-24,-5.5,Local Coffee,Coffee,acc_001,Coffee purchase
+2024-02-24,-4.25,Local Coffee,Coffee,acc_001,Coffee purchase
+2024-02-24,-45,Sweetgreen,Restaurants,acc_001,Friday dinner
+2024-02-25,-4.25,Dunkin,Coffee,acc_001,Coffee purchase
+2024-02-25,-30,Lyft,Rideshare,acc_001,Weekend ride
+2024-02-26,-30,Uber,Rideshare,acc_001,Weekend ride
+2024-02-27,-5.5,Dunkin,Coffee,acc_001,Coffee purchase
+2024-02-28,-3.5,Local Coffee,Coffee,acc_001,Coffee purchase
+2024-02-28,-4.25,Local Coffee,Coffee,acc_001,Coffee purchase
+2024-02-29,-4.25,Starbucks,Coffee,acc_001,Coffee purchase
+2024-02-29,-96,Whole Foods,Groceries,acc_001,Grocery shopping
+2024-03-01,-5.5,Starbucks,Coffee,acc_001,Coffee purchase
+2024-03-02,1800,Employer,Income,acc_001,Salary deposit
+2024-03-02,-45,Local Bistro,Restaurants,acc_001,Friday dinner
+2024-03-03,-18,Lyft,Rideshare,acc_001,Weekend ride
+2024-03-04,-5.5,Starbucks,Coffee,acc_001,Coffee purchase
+2024-03-04,-3.5,Local Coffee,Coffee,acc_001,Coffee purchase
+2024-03-05,-3.5,Starbucks,Coffee,acc_001,Coffee purchase
+2024-03-05,-5.5,Local Coffee,Coffee,acc_001,Coffee purchase
+2024-03-06,-5.5,Dunkin,Coffee,acc_001,Coffee purchase
+2024-03-08,-3.5,Starbucks,Coffee,acc_001,Coffee purchase
+2024-03-08,-96,Whole Foods,Groceries,acc_001,Grocery shopping
+2024-03-09,-25,Local Bistro,Restaurants,acc_001,Friday dinner
+2024-03-10,-4.25,Local Coffee,Coffee,acc_001,Coffee purchase
+2024-03-10,-4.25,Starbucks,Coffee,acc_001,Coffee purchase
+2024-03-10,-24,Lyft,Rideshare,acc_001,Weekend ride
+2024-03-10,-5.5,Starbucks,Coffee,acc_001,Coffee purchase
+2024-03-10,-12,Lyft,Rideshare,acc_001,Weekend ride
+2024-03-10,-120,Whole Foods,Groceries,acc_001,Grocery shopping
+2024-03-11,-5.5,Dunkin,Coffee,acc_001,Coffee purchase
+2024-03-12,-3.5,Starbucks,Coffee,acc_001,Coffee purchase
+2024-03-13,-3.5,Dunkin,Coffee,acc_001,Coffee purchase
+2024-03-14,-120,Whole Foods,Groceries,acc_001,Grocery shopping
+2024-03-15,1800,Employer,Income,acc_001,Salary deposit
+2024-03-15,-15.99,Netflix,Subscriptions,acc_001,Monthly subscription
+2024-03-15,-10.99,Spotify,Subscriptions,acc_001,Monthly subscription
+2024-03-15,-2.99,Apple iCloud,Subscriptions,acc_001,Monthly subscription
+2024-03-15,-3.5,Dunkin,Coffee,acc_001,Coffee purchase
+2024-03-15,-45,Chipotle,Restaurants,acc_001,Friday dinner
+2024-03-16,-15.99,Netflix,Subscriptions,acc_001,Monthly subscription
+2024-03-16,-10.99,Spotify,Subscriptions,acc_001,Monthly subscription
+2024-03-16,-2.99,Apple iCloud,Subscriptions,acc_001,Monthly subscription
+2024-03-16,-4.25,Starbucks,Coffee,acc_001,Coffee purchase
+2024-03-16,-12,Lyft,Rideshare,acc_001,Weekend ride
+2024-03-17,-15.99,Netflix,Subscriptions,acc_001,Monthly subscription
+2024-03-17,-10.99,Spotify,Subscriptions,acc_001,Monthly subscription
+2024-03-17,-2.99,Apple iCloud,Subscriptions,acc_001,Monthly subscription
+2024-03-17,-5.5,Starbucks,Coffee,acc_001,Coffee purchase
+2024-03-17,-30,Uber,Rideshare,acc_001,Weekend ride
+2024-03-18,-15.99,Netflix,Subscriptions,acc_001,Monthly subscription
+2024-03-18,-10.99,Spotify,Subscriptions,acc_001,Monthly subscription
+2024-03-18,-2.99,Apple iCloud,Subscriptions,acc_001,Monthly subscription
+2024-03-18,-3.5,Dunkin,Coffee,acc_001,Coffee purchase
+2024-03-19,-15.99,Netflix,Subscriptions,acc_001,Monthly subscription
+2024-03-19,-10.99,Spotify,Subscriptions,acc_001,Monthly subscription
+2024-03-19,-2.99,Apple iCloud,Subscriptions,acc_001,Monthly subscription
+2024-03-19,-3.5,Local Coffee,Coffee,acc_001,Coffee purchase
+2024-03-20,-15.99,Netflix,Subscriptions,acc_001,Monthly subscription
+2024-03-20,-10.99,Spotify,Subscriptions,acc_001,Monthly subscription
+2024-03-20,-2.99,Apple iCloud,Subscriptions,acc_001,Monthly subscription
+2024-03-20,-4.25,Dunkin,Coffee,acc_001,Coffee purchase
+2024-03-20,-96,Whole Foods,Groceries,acc_001,Grocery shopping
+2024-03-21,-3.5,Local Coffee,Coffee,acc_001,Coffee purchase
+2024-03-21,-96,Whole Foods,Groceries,acc_001,Grocery shopping
+2024-03-22,-3.5,Dunkin,Coffee,acc_001,Coffee purchase
+2024-03-22,-4.25,Local Coffee,Coffee,acc_001,Coffee purchase
+2024-03-22,-45,Local Bistro,Restaurants,acc_001,Friday dinner
+2024-03-23,-4.25,Local Coffee,Coffee,acc_001,Coffee purchase
+2024-03-23,-24,Uber,Rideshare,acc_001,Weekend ride
+2024-03-24,-3.5,Dunkin,Coffee,acc_001,Coffee purchase
+2024-03-25,-7.99,MagApp Pro,Subscriptions,acc_001,Forgotten trial → paid
+2024-03-26,-5.5,Dunkin,Coffee,acc_001,Coffee purchase
+2024-03-26,-4.25,Starbucks,Coffee,acc_001,Coffee purchase
+2024-03-27,-3.5,Dunkin,Coffee,acc_001,Coffee purchase
+2024-03-27,-3.5,Dunkin,Coffee,acc_001,Coffee purchase
+2024-03-28,-4.25,Starbucks,Coffee,acc_001,Coffee purchase
+2024-03-28,-4.25,Local Coffee,Coffee,acc_001,Coffee purchase
+2024-03-28,-120,Whole Foods,Groceries,acc_001,Grocery shopping
+2024-03-29,-3.5,Starbucks,Coffee,acc_001,Coffee purchase
+2024-03-29,-5.5,Starbucks,Coffee,acc_001,Coffee purchase
+2024-03-29,-60,Chipotle,Restaurants,acc_001,Friday dinner
+2024-03-30,-96,Whole Foods,Groceries,acc_001,Grocery shopping

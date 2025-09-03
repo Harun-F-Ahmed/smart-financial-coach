@@ -6,16 +6,19 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "gen:csv": "tsx scripts/generate_csv.ts",
+    "seed": "tsx scripts/seed.ts",
+    "check": "tsx scripts/check.ts"
   },
   "dependencies": {
-    "@prisma/client": "^6.15.0",
     "next": "15.5.2",
     "react": "19.1.0",
     "react-dom": "19.1.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@prisma/client": "^6.15.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
@@ -27,6 +30,7 @@
     "prettier": "^3.6.2",
     "prisma": "^6.15.0",
     "tailwindcss": "^4",
+    "tsx": "^4.20.5",
     "typescript": "^5"
   }
 }
