@@ -1,70 +1,149 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import SubscriptionsFilters from './components/SubscriptionsFilters';
+import SubscriptionsSummary from './components/SubscriptionsSummary';
+import SubscriptionsTable from './components/SubscriptionsTable';
+
+interface Subscription {
+  merchant: string;
+  periodicityDays: number;
+  monthlyEstimate: number;
+  lastCharge: string;
+  nextExpected: string;
+  isGray: boolean;
+  confidence: number;
+  features: {
+    n: number;
+    periodicityStrength: number;
+    amountStability: number;
+    domStability: number;
+    recencyBoost: number;
+  };
+}
+
+interface SubscriptionsResponse {
+  items: Subscription[];
+}
+
 export default function SubscriptionsPage() {
+  const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
+  const [filteredSubscriptions, setFilteredSubscriptions] = useState<Subscription[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [showGrayOnly, setShowGrayOnly] = useState(false);
+  const [showNewOnly, setShowNewOnly] = useState(false);
+
+  // Fetch subscriptions on component mount
+  useEffect(() => {
+    fetchSubscriptions();
+  }, []);
+
+  // Apply filters when subscriptions or filter states change
+  useEffect(() => {
+    let filtered = [...subscriptions];
+
+    if (showGrayOnly) {
+      filtered = filtered.filter(sub => sub.isGray);
+    }
+
+    if (showNewOnly) {
+      // Filter for subscriptions that started in the last 30 days
+      const thirtyDaysAgo = new Date();
+      thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+      
+      filtered = filtered.filter(sub => {
+        const lastChargeDate = new Date(sub.lastCharge);
+        // If we have fewer than 3 occurrences, it's likely new
+        return sub.features.n < 3 || lastChargeDate >= thirtyDaysAgo;
+      });
+    }
+
+    setFilteredSubscriptions(filtered);
+  }, [subscriptions, showGrayOnly, showNewOnly]);
+
+  const fetchSubscriptions = async () => {
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch('/api/subscriptions');
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to fetch subscriptions');
+      }
+
+      const result: SubscriptionsResponse = await response.json();
+      setSubscriptions(result.items);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An unexpected error occurred');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleRetry = () => {
+    fetchSubscriptions();
+  };
+
+  // Check if we have enough data to show the "new" filter
+  const hasNewFilter = subscriptions.some(sub => {
+    const thirtyDaysAgo = new Date();
+    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+    const lastChargeDate = new Date(sub.lastCharge);
+    return sub.features.n < 3 || lastChargeDate >= thirtyDaysAgo;
+  });
+
   return (
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold text-gray-900">Subscriptions</h1>
-        <p className="mt-2 text-gray-600">Track your recurring charges and detect gray charges</p>
+        <p className="mt-2 text-gray-600">Manage your recurring subscriptions and detect gray charges</p>
       </div>
 
-      {/* Subscriptions Table */}
-      <div className="bg-white rounded-lg shadow overflow-hidden">
-        <div className="px-6 py-4 border-b border-gray-200">
-          <h3 className="text-lg font-medium text-gray-900">Active Subscriptions</h3>
-        </div>
-        <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Merchant
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  $/mo
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Last Charge
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Next Expected
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Gray?
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {/* Empty state row */}
-              <tr>
-                <td colSpan={5} className="px-6 py-12 text-center text-gray-500">
-                  <div className="flex flex-col items-center">
-                    <svg className="w-12 h-12 text-gray-300 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
-                    <p className="text-lg font-medium text-gray-900 mb-1">No subscriptions found</p>
-                    <p className="text-sm">We'll detect recurring charges from your transaction data</p>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+      {/* Filters */}
+      <SubscriptionsFilters
+        showGrayOnly={showGrayOnly}
+        onGrayOnlyToggle={setShowGrayOnly}
+        showNewOnly={showNewOnly}
+        onNewOnlyToggle={setShowNewOnly}
+        hasNewFilter={hasNewFilter}
+      />
 
-      {/* Summary Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-white rounded-lg shadow p-6">
-          <h4 className="text-sm font-medium text-gray-500">Total Monthly Cost</h4>
-          <p className="text-2xl font-semibold text-gray-900">$0</p>
+      {/* Error State */}
+      {error && (
+        <div className="bg-red-50 border border-red-200 rounded-lg p-6">
+          <div className="flex items-center">
+            <div className="flex-shrink-0">
+              <svg className="w-5 h-5 text-red-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+              </svg>
+            </div>
+            <div className="ml-3">
+              <h3 className="text-sm font-medium text-red-800">Failed to load subscriptions</h3>
+              <p className="text-sm text-red-700 mt-1">{error}</p>
+              <button
+                onClick={handleRetry}
+                className="mt-2 text-sm bg-red-100 text-red-800 px-3 py-1 rounded hover:bg-red-200"
+              >
+                Try again
+              </button>
+            </div>
+          </div>
         </div>
-        <div className="bg-white rounded-lg shadow p-6">
-          <h4 className="text-sm font-medium text-gray-500">Active Subscriptions</h4>
-          <p className="text-2xl font-semibold text-gray-900">0</p>
-        </div>
-        <div className="bg-white rounded-lg shadow p-6">
-          <h4 className="text-sm font-medium text-gray-500">Gray Charges</h4>
-          <p className="text-2xl font-semibold text-gray-900">0</p>
-        </div>
-      </div>
+      )}
+
+      {/* Summary */}
+      {!isLoading && !error && subscriptions.length > 0 && (
+        <SubscriptionsSummary subscriptions={subscriptions} />
+      )}
+
+      {/* Table */}
+      <SubscriptionsTable 
+        subscriptions={filteredSubscriptions} 
+        isLoading={isLoading}
+      />
     </div>
   );
 }
