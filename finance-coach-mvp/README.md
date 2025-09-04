@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Finance Coach MVP
 
-## Getting Started
+A financial management demo built with Next.js, TypeScript, and Prisma. This hackathon project showcases full-stack development skills with synthetic transaction data analysis.
 
-First, run the development server:
+## 🚀 Quick Start
 
 ```bash
+# Install dependencies
+npm install
+
+# Set up database
+npx prisma migrate dev --name init
+npx prisma generate
+
+# Generate sample data
+npm run gen:csv
+npm run seed
+
+# Start development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit `http://localhost:3000` to see the demo.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ✨ Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Dashboard**: Financial overview with KPIs and charts
+- **Insights**: Spending pattern analysis with 11+ detectors
+- **Subscriptions**: Automatic recurring charge detection
+- **Goals**: Savings planning with forecasting algorithms
+- **Privacy Controls**: Data export and deletion
 
-## Learn More
+## 🛠 Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+- **Next.js** - App Router, API Routes
+- **TypeScript** - Full type safety
+- **Prisma + SQLite** - Database and ORM
+- **Tailwind CSS** - Styling
+- **Framer Motion** - Animations
+- **Recharts** - Data visualizations
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📊 Analytics Engine
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Custom algorithms for:
+- Coffee spending pattern detection
+- Weekend rideshare spike analysis
+- Subscription detection with confidence scoring
+- Category anomaly detection
+- Savings goal forecasting (mean, regression, exponential smoothing)
 
-## Deploy on Vercel
+## 🔧 API Endpoints
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `GET /api/transactions` - Monthly transaction data
+- `GET /api/insights` - Spending analysis
+- `GET /api/subscriptions` - Recurring charges
+- `POST /api/goals` - Savings planning
+- `GET /api/privacy/export` - Data export
+- `POST /api/privacy/delete` - Data deletion
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📁 Project Structure
+
+```
+src/
+├── app/                    # Next.js App Router
+│   ├── api/               # API endpoints
+│   ├── dashboard/         # Financial overview
+│   ├── insights/          # Spending analysis
+│   ├── subscriptions/     # Recurring charges
+│   └── goals/             # Savings planning
+├── lib/                   # Business logic
+│   ├── insights/          # Analytics engine
+│   ├── goals/             # Forecasting
+│   └── utils/             # Utilities
+└── components/            # UI components
+```
+
+## 🧪 Development
+
+```bash
+npm run dev          # Development server
+npm run build        # Production build
+npm run lint         # Code linting
+npm run gen:csv      # Generate sample data
+npm run seed         # Populate database
+```
+
+## 📝 Note
+
+This is a **demo application** using synthetic transaction data. No real bank connections or financial data processing. Built for hackathon/portfolio demonstration purposes.
+
+## 📄 License
+
+MIT License
