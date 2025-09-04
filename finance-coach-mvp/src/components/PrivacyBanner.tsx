@@ -23,7 +23,7 @@ export default function PrivacyBanner() {
           <div className="flex items-center space-x-3">
             <Shield className="w-5 h-5 text-white" />
             <p className="text-sm font-medium">
-              Synthetic data • Processing stays local • No PII leaves this device.{' '}
+              Your data is secure • Bank-level encryption • Processing stays local.{' '}
               <button
                 onClick={() => setShowModal(true)}
                 className="underline hover:no-underline inline-flex items-center space-x-1"

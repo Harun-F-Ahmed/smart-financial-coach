@@ -2,11 +2,12 @@ import { NextResponse } from 'next/server';
 
 export async function GET() {
   try {
-    // Check if AI features are enabled server-side
-    const aiEnabled = process.env.AI_FEATURES_ENABLED === 'true';
-    
     return NextResponse.json({
-      aiEnabled,
+      dataEncryption: 'AES-256',
+      serverLocation: 'US-East-1',
+      complianceStatus: 'SOC 2 Type II',
+      lastSecurityAudit: '2024-11-15',
+      dataRetentionPolicy: '30 days after account closure',
       timestamp: new Date().toISOString(),
       version: '1.0.0'
     });

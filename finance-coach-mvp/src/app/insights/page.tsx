@@ -30,8 +30,6 @@ interface InsightsResponse {
 export default function InsightsPage() {
   const [selectedYear, setSelectedYear] = useState('2023'); // Default to seeded year
   const [selectedMonth, setSelectedMonth] = useState('11'); // Default to seeded month (November)
-  const [showExtras, setShowExtras] = useState(false);
-  const [coachTone, setCoachTone] = useState(false);
   const [data, setData] = useState<InsightsResponse | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -46,7 +44,7 @@ export default function InsightsPage() {
   // Fetch insights when controls change
   useEffect(() => {
     fetchInsights();
-  }, [selectedYear, selectedMonth, showExtras, coachTone]);
+  }, [selectedYear, selectedMonth]);
 
   const fetchInsights = async () => {
     setIsLoading(true);
@@ -55,12 +53,9 @@ export default function InsightsPage() {
     try {
       const monthParam = `${selectedYear}-${selectedMonth.padStart(2, '0')}`;
       const params = new URLSearchParams({
-        month: monthParam
+        month: monthParam,
+        extras: 'all' // Always show all insights
       });
-
-      if (showExtras) {
-        params.append('extras', 'all');
-      }
 
       if (debugMode) {
         params.append('debug', '1');
@@ -99,10 +94,6 @@ export default function InsightsPage() {
         onYearChange={setSelectedYear}
         selectedMonth={selectedMonth}
         onMonthChange={setSelectedMonth}
-        showExtras={showExtras}
-        onExtrasToggle={setShowExtras}
-        coachTone={coachTone}
-        onCoachToneToggle={setCoachTone}
       />
 
       {/* Loading State */}
@@ -167,13 +158,12 @@ export default function InsightsPage() {
       {data && !isLoading && (
         <div className="space-y-6">
           {/* Summary */}
-          <InsightsSummary
-            txCount={data.meta.txCount}
-            totalExpenses={data.meta.totalExpenses}
-            discretionaryExpenses={data.meta.discretionaryExpenses}
-            generated={data.meta.selection.generated}
-            returned={data.meta.selection.returned}
-          />
+                        <InsightsSummary
+                txCount={data.meta.txCount}
+                totalExpenses={data.meta.totalExpenses}
+                discretionaryExpenses={data.meta.discretionaryExpenses}
+                totalInsights={data.insights.length}
+              />
 
           {/* Insights */}
           {data.insights.length === 0 ? (

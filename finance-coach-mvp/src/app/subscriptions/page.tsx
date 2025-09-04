@@ -31,7 +31,6 @@ export default function SubscriptionsPage() {
   const [filteredSubscriptions, setFilteredSubscriptions] = useState<Subscription[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [showGrayOnly, setShowGrayOnly] = useState(false);
   const [showNewOnly, setShowNewOnly] = useState(false);
 
   // Fetch subscriptions on component mount
@@ -42,10 +41,6 @@ export default function SubscriptionsPage() {
   // Apply filters when subscriptions or filter states change
   useEffect(() => {
     let filtered = [...subscriptions];
-
-    if (showGrayOnly) {
-      filtered = filtered.filter(sub => sub.isGray);
-    }
 
     if (showNewOnly) {
       // Filter for subscriptions that started in the last 30 days
@@ -60,7 +55,7 @@ export default function SubscriptionsPage() {
     }
 
     setFilteredSubscriptions(filtered);
-  }, [subscriptions, showGrayOnly, showNewOnly]);
+  }, [subscriptions, showNewOnly]);
 
   const fetchSubscriptions = async () => {
     setIsLoading(true);
@@ -104,8 +99,6 @@ export default function SubscriptionsPage() {
 
       {/* Filters */}
       <SubscriptionsFilters
-        showGrayOnly={showGrayOnly}
-        onGrayOnlyToggle={setShowGrayOnly}
         showNewOnly={showNewOnly}
         onNewOnlyToggle={setShowNewOnly}
         hasNewFilter={hasNewFilter}

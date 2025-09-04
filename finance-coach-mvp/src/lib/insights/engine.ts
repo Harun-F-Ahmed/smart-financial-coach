@@ -120,7 +120,7 @@ export function computeWeekendRideshare(context: InsightsContext): Insight | nul
   return {
     id: 'weekend-rideshare',
     title: 'Weekend rideshare costs add up',
-    detail: `Weekend rideshare spending is ${Math.round((weekendAvg / weekdayAvg) * 100)}% higher than weekdays. Consider public transit for some weekend trips to save $${roundToWhole(monthlyImpact)} monthly.`,
+    detail: `Weekend rideshare spending is ${weekdayAvg > 0 ? Math.round((weekendAvg / weekdayAvg) * 100) : 100}% higher than weekdays. Consider public transit for some weekend trips to save $${roundToWhole(monthlyImpact)} monthly.`,
     impact: { monthly: roundToWhole(monthlyImpact), annual: roundToWhole(monthlyImpact * 12) },
     confidence,
     tags: ['rideshare', 'transportation'],
