@@ -130,3 +130,20 @@ body {
   background-size: 200px 100%;
   animation: shimmer 1.5s infinite;
 }
+
+/* Ensure dropdown options have good contrast */
+select {
+  color: #1f2937 !important;
+  background-color: white !important;
+}
+
+select option {
+  background-color: white;
+  color: #1f2937;
+  padding: 8px 12px;
+}
+
+select:focus option {
+  background-color: #f3f4f6;
+  color: #1f2937;
+}

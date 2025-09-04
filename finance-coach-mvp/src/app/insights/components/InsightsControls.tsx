@@ -66,7 +66,7 @@ export default function InsightsControls({
             id="year-select"
             value={selectedYear}
             onChange={(e) => onYearChange(e.target.value)}
-            className="block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
           >
             {yearOptions.map((option) => (
               <option key={option.value} value={option.value}>
@@ -85,7 +85,7 @@ export default function InsightsControls({
             id="month-select"
             value={selectedMonth}
             onChange={(e) => onMonthChange(e.target.value)}
-            className="block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
           >
             {monthOptions.map((option) => (
               <option key={option.value} value={option.value}>

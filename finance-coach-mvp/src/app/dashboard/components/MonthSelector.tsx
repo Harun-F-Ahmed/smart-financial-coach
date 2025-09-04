@@ -70,7 +70,7 @@ export default function MonthSelector({
               id="year-select"
               value={selectedYear}
               onChange={(e) => onYearChange(e.target.value)}
-              className="block w-full px-4 py-3 bg-white/80 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none cursor-pointer"
+              className="block w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none cursor-pointer text-gray-900"
             >
               {yearOptions.map((option) => (
                 <option key={option.value} value={option.value}>
@@ -92,7 +92,7 @@ export default function MonthSelector({
               id="month-select"
               value={selectedMonth}
               onChange={(e) => onMonthChange(e.target.value)}
-              className="block w-full px-4 py-3 bg-white/80 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none cursor-pointer"
+              className="block w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none cursor-pointer text-gray-900"
             >
               {monthOptions.map((option) => (
                 <option key={option.value} value={option.value}>
