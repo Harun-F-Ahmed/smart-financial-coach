@@ -1,5 +1,7 @@
 'use client';
 
+import { formatCurrency } from '../../../lib/utils/formatting';
+
 interface Subscription {
   merchant: string;
   periodicityDays: number;
@@ -22,14 +24,6 @@ interface SubscriptionsSummaryProps {
 }
 
 export default function SubscriptionsSummary({ subscriptions }: SubscriptionsSummaryProps) {
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0
-    }).format(amount);
-  };
 
   const totalMonthly = subscriptions.reduce((sum, sub) => sum + sub.monthlyEstimate, 0);
   const totalAnnual = totalMonthly * 12;

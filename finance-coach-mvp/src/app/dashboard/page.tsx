@@ -1,10 +1,12 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import MonthSelector from './components/MonthSelector';
 import DashboardKPIs from './components/DashboardKPIs';
 import DailySpendChart from './components/DailySpendChart';
 import TopCategoriesChart from './components/TopCategoriesChart';
+import { getPreviousMonth } from '../../lib/utils/date';
 
 interface Transaction {
   id: string;
@@ -88,16 +90,6 @@ export default function DashboardPage() {
     }
   };
 
-  const getPreviousMonth = (year: string, month: string) => {
-    const yearNum = parseInt(year);
-    const monthNum = parseInt(month);
-    
-    if (monthNum === 1) {
-      return `${yearNum - 1}-12`;
-    } else {
-      return `${yearNum}-${(monthNum - 1).toString().padStart(2, '0')}`;
-    }
-  };
 
   const handleRetry = () => {
     fetchData();
@@ -109,11 +101,17 @@ export default function DashboardPage() {
     : undefined;
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
-        <p className="mt-2 text-gray-600">Overview of your financial activity</p>
-      </div>
+    <div className="space-y-8">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <h1 className="text-4xl font-bold text-white drop-shadow-lg">
+          Dashboard
+        </h1>
+        <p className="mt-2 text-lg text-white/90 drop-shadow">Overview of your financial activity</p>
+      </motion.div>
 
       {/* Month Selector */}
       <MonthSelector

@@ -1,5 +1,8 @@
 'use client';
 
+import { motion } from 'framer-motion';
+import { Calendar, ChevronDown } from 'lucide-react';
+
 interface MonthSelectorProps {
   selectedYear: string;
   onYearChange: (year: string) => void;
@@ -45,8 +48,16 @@ export default function MonthSelector({
   const monthOptions = generateMonthOptions();
 
   return (
-    <div className="bg-white rounded-lg shadow p-6">
-      <h3 className="text-lg font-medium text-gray-900 mb-4">Select Month</h3>
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="glass rounded-xl p-6"
+    >
+      <div className="flex items-center mb-6">
+        <Calendar className="w-5 h-5 text-blue-500 mr-2" />
+        <h3 className="text-lg font-semibold text-gray-900">Select Month</h3>
+      </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Year Selector */}
@@ -54,18 +65,21 @@ export default function MonthSelector({
           <label htmlFor="year-select" className="block text-sm font-medium text-gray-700 mb-2">
             Year
           </label>
-          <select
-            id="year-select"
-            value={selectedYear}
-            onChange={(e) => onYearChange(e.target.value)}
-            className="block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          >
-            {yearOptions.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
+          <div className="relative">
+            <select
+              id="year-select"
+              value={selectedYear}
+              onChange={(e) => onYearChange(e.target.value)}
+              className="block w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none cursor-pointer text-gray-900"
+            >
+              {yearOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+            <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+          </div>
         </div>
 
         {/* Month Selector */}
@@ -73,20 +87,23 @@ export default function MonthSelector({
           <label htmlFor="month-select" className="block text-sm font-medium text-gray-700 mb-2">
             Month
           </label>
-          <select
-            id="month-select"
-            value={selectedMonth}
-            onChange={(e) => onMonthChange(e.target.value)}
-            className="block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          >
-            {monthOptions.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
+          <div className="relative">
+            <select
+              id="month-select"
+              value={selectedMonth}
+              onChange={(e) => onMonthChange(e.target.value)}
+              className="block w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none cursor-pointer text-gray-900"
+            >
+              {monthOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+            <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+          </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

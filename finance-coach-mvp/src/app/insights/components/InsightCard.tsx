@@ -1,5 +1,8 @@
 'use client';
 
+import { formatCurrency } from '../../../lib/utils/formatting';
+import { getConfidenceColor, getConfidenceLabel } from '../../../lib/utils/insights';
+
 interface Insight {
   id: string;
   title: string;
@@ -14,26 +17,6 @@ interface InsightCardProps {
 }
 
 export default function InsightCard({ insight }: InsightCardProps) {
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0
-    }).format(amount);
-  };
-
-  const getConfidenceColor = (confidence: number) => {
-    if (confidence >= 0.8) return 'bg-green-500';
-    if (confidence >= 0.6) return 'bg-yellow-500';
-    return 'bg-red-500';
-  };
-
-  const getConfidenceLabel = (confidence: number) => {
-    if (confidence >= 0.8) return 'High';
-    if (confidence >= 0.6) return 'Medium';
-    return 'Low';
-  };
 
   const confidencePercentage = Math.round(insight.confidence * 100);
 
