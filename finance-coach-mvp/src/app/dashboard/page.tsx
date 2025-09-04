@@ -107,10 +107,10 @@ export default function DashboardPage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+        <h1 className="text-4xl font-bold text-white drop-shadow-lg">
           Dashboard
         </h1>
-        <p className="mt-2 text-lg text-gray-600">Overview of your financial activity</p>
+        <p className="mt-2 text-lg text-white/90 drop-shadow">Overview of your financial activity</p>
       </motion.div>
 
       {/* Month Selector */}

@@ -89,8 +89,8 @@ export default function InsightsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Insights</h1>
-        <p className="mt-2 text-gray-600">Smart analysis of your spending patterns</p>
+        <h1 className="text-4xl font-bold text-white drop-shadow-lg">Insights</h1>
+        <p className="mt-2 text-lg text-white/90 drop-shadow">Smart analysis of your spending patterns</p>
       </div>
 
       {/* Controls */}

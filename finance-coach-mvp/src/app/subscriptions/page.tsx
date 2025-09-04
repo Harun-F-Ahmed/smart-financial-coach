@@ -98,8 +98,8 @@ export default function SubscriptionsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Subscriptions</h1>
-        <p className="mt-2 text-gray-600">Manage your recurring subscriptions and detect gray charges</p>
+        <h1 className="text-4xl font-bold text-white drop-shadow-lg">Subscriptions</h1>
+        <p className="mt-2 text-lg text-white/90 drop-shadow">Manage your recurring subscriptions and detect gray charges</p>
       </div>
 
       {/* Filters */}

@@ -90,8 +90,8 @@ export default function GoalsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Financial Goals</h1>
-        <p className="mt-2 text-gray-600">Set savings targets and get personalized recommendations</p>
+        <h1 className="text-4xl font-bold text-white drop-shadow-lg">Financial Goals</h1>
+        <p className="mt-2 text-lg text-white/90 drop-shadow">Set savings targets and get personalized recommendations</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
