@@ -6,16 +6,14 @@ interface InsightsSummaryProps {
   txCount: number;
   totalExpenses: number;
   discretionaryExpenses: number;
-  generated: number;
-  returned: number;
+  totalInsights: number;
 }
 
 export default function InsightsSummary({
   txCount,
   totalExpenses,
   discretionaryExpenses,
-  generated,
-  returned
+  totalInsights
 }: InsightsSummaryProps) {
 
   const discretionaryPercentage = totalExpenses > 0 
@@ -26,7 +24,7 @@ export default function InsightsSummary({
     <div className="bg-white rounded-lg shadow p-6">
       <h3 className="text-lg font-medium text-gray-900 mb-4">Month Summary</h3>
       
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div className="text-center">
           <p className="text-2xl font-semibold text-gray-900">{txCount}</p>
           <p className="text-sm text-gray-500">Transactions</p>
@@ -50,13 +48,8 @@ export default function InsightsSummary({
         </div>
         
         <div className="text-center">
-          <p className="text-2xl font-semibold text-gray-900">{generated}</p>
-          <p className="text-sm text-gray-500">Insights Generated</p>
-        </div>
-        
-        <div className="text-center">
-          <p className="text-2xl font-semibold text-gray-900">{returned}</p>
-          <p className="text-sm text-gray-500">Insights Shown</p>
+          <p className="text-2xl font-semibold text-gray-900">{totalInsights}</p>
+          <p className="text-sm text-gray-500">Total Insights</p>
         </div>
       </div>
     </div>

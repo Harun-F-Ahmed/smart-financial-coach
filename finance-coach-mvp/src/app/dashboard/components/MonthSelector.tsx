@@ -60,28 +60,6 @@ export default function MonthSelector({
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {/* Year Selector */}
-        <div>
-          <label htmlFor="year-select" className="block text-sm font-medium text-gray-700 mb-2">
-            Year
-          </label>
-          <div className="relative">
-            <select
-              id="year-select"
-              value={selectedYear}
-              onChange={(e) => onYearChange(e.target.value)}
-              className="block w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none cursor-pointer text-gray-900"
-            >
-              {yearOptions.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-            <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
-          </div>
-        </div>
-
         {/* Month Selector */}
         <div>
           <label htmlFor="month-select" className="block text-sm font-medium text-gray-700 mb-2">
@@ -95,6 +73,28 @@ export default function MonthSelector({
               className="block w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none cursor-pointer text-gray-900"
             >
               {monthOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+            <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+          </div>
+        </div>
+
+        {/* Year Selector */}
+        <div>
+          <label htmlFor="year-select" className="block text-sm font-medium text-gray-700 mb-2">
+            Year
+          </label>
+          <div className="relative">
+            <select
+              id="year-select"
+              value={selectedYear}
+              onChange={(e) => onYearChange(e.target.value)}
+              className="block w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none cursor-pointer text-gray-900"
+            >
+              {yearOptions.map((option) => (
                 <option key={option.value} value={option.value}>
                   {option.label}
                 </option>

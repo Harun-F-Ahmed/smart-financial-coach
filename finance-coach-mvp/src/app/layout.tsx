@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import DisclaimerBanner from "../components/DisclaimerBanner";
 import PrivacyBanner from "../components/PrivacyBanner";
 import { Inter } from 'next/font/google';
 
@@ -54,7 +53,6 @@ export default function RootLayout({
         </header>
         <PrivacyBanner />
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <DisclaimerBanner />
           {children}
         </main>
       </body>

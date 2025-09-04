@@ -82,12 +82,14 @@ export async function GET(request: NextRequest) {
     
     const savings = income - expenses;
 
-    // Group by category
+    // Group by category (expenses only)
     const categoryMap = new Map<string, number>();
-    transactions.forEach(t => {
-      const current = categoryMap.get(t.category) || 0;
-      categoryMap.set(t.category, current + Math.abs(t.amount));
-    });
+    transactions
+      .filter(t => t.amount < 0) // Only include expenses
+      .forEach(t => {
+        const current = categoryMap.get(t.category) || 0;
+        categoryMap.set(t.category, current + Math.abs(t.amount));
+      });
 
     const byCategory: CategoryRollup[] = Array.from(categoryMap.entries())
       .map(([category, total]) => ({ category, total }))

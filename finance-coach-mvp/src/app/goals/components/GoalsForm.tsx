@@ -132,10 +132,10 @@ export default function GoalsForm({ onSubmit, isLoading }: GoalsFormProps) {
             id="targetAmount"
             value={targetAmount}
             onChange={(e) => setTargetAmount(e.target.value)}
-            className={`block w-full pl-7 pr-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+            className={`block w-full pl-7 pr-3 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white ${
               errors.targetAmount ? 'border-red-300' : 'border-gray-300'
             }`}
-            placeholder="5000"
+            placeholder="Enter your savings goal"
             min="1"
             step="1"
             required
@@ -185,10 +185,10 @@ export default function GoalsForm({ onSubmit, isLoading }: GoalsFormProps) {
               type="number"
               value={months}
               onChange={(e) => setMonths(e.target.value)}
-              className={`block w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+              className={`block w-full px-3 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white ${
                 errors.months ? 'border-red-300' : 'border-gray-300'
               }`}
-              placeholder="12"
+              placeholder="Enter number of months"
               min="1"
               max="120"
               required
@@ -206,7 +206,7 @@ export default function GoalsForm({ onSubmit, isLoading }: GoalsFormProps) {
               type="date"
               value={targetDate}
               onChange={(e) => setTargetDate(e.target.value)}
-              className={`block w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+              className={`block w-full px-3 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white ${
                 errors.targetDate ? 'border-red-300' : 'border-gray-300'
               }`}
               min={new Date().toISOString().split('T')[0]}

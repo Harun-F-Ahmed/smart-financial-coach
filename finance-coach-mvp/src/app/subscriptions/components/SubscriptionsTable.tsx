@@ -27,7 +27,7 @@ interface SubscriptionsTableProps {
   isLoading: boolean;
 }
 
-type SortField = 'monthlyEstimate' | 'confidence' | 'nextExpected';
+type SortField = 'monthlyEstimate' | 'nextExpected';
 type SortDirection = 'asc' | 'desc';
 
 export default function SubscriptionsTable({ subscriptions, isLoading }: SubscriptionsTableProps) {
@@ -52,10 +52,6 @@ export default function SubscriptionsTable({ subscriptions, isLoading }: Subscri
       case 'monthlyEstimate':
         aValue = a.monthlyEstimate;
         bValue = b.monthlyEstimate;
-        break;
-      case 'confidence':
-        aValue = a.confidence;
-        bValue = b.confidence;
         break;
       case 'nextExpected':
         aValue = new Date(a.nextExpected).getTime();
@@ -83,8 +79,8 @@ export default function SubscriptionsTable({ subscriptions, isLoading }: Subscri
           </div>
           {[...Array(5)].map((_, i) => (
             <div key={i} className="px-6 py-4 border-b border-gray-200">
-              <div className="grid grid-cols-7 gap-4">
-                {[...Array(7)].map((_, j) => (
+              <div className="grid grid-cols-5 gap-4">
+                {[...Array(5)].map((_, j) => (
                   <div key={j} className="h-4 bg-gray-200 rounded"></div>
                 ))}
               </div>
@@ -152,22 +148,6 @@ export default function SubscriptionsTable({ subscriptions, isLoading }: Subscri
                   )}
                 </div>
               </th>
-              <th 
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
-                onClick={() => handleSort('confidence')}
-              >
-                <div className="flex items-center space-x-1">
-                  <span>Confidence</span>
-                  {sortField === 'confidence' && (
-                    <span className="text-gray-400">
-                      {sortDirection === 'asc' ? '↑' : '↓'}
-                    </span>
-                  )}
-                </div>
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Gray?
-              </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Actions
               </th>
@@ -200,30 +180,6 @@ export default function SubscriptionsTable({ subscriptions, isLoading }: Subscri
                   <div className="text-sm text-gray-900">
                     {formatDate(subscription.nextExpected)}
                   </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="flex items-center">
-                    <div className="w-16 bg-gray-200 rounded-full h-2 mr-2">
-                      <div 
-                        className={`h-2 rounded-full ${getConfidenceColor(subscription.confidence)}`}
-                        style={{ width: `${Math.round(subscription.confidence * 100)}%` }}
-                      />
-                    </div>
-                    <span className="text-xs text-gray-500">
-                      {getConfidenceLabel(subscription.confidence)}
-                    </span>
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {subscription.isGray ? (
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
-                      Gray
-                    </span>
-                  ) : (
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                      Normal
-                    </span>
-                  )}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                   <button
