@@ -1,5 +1,0 @@
-[33mf4e9408[m[33m ([m[1;36mHEAD -> [m[1;32mfeat/schema-seed[m[33m)[m define  prisma schema
-[33m360e9e3[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m add implementation notes
-[33m221347f[m added lint hook
-[33m2f6334a[m set up primsa with sqlite
-[33mb5a3563[m scaffold for next.js app
