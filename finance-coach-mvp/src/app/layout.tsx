@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import DisclaimerBanner from "../components/DisclaimerBanner";
+import PrivacyBanner from "../components/PrivacyBanner";
 import { Inter } from 'next/font/google';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -44,10 +45,14 @@ export default function RootLayout({
                 <a href="/goals" className="text-gray-700 hover:text-blue-600 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-white/50">
                   Goals
                 </a>
+                <a href="/about/privacy" className="text-gray-700 hover:text-blue-600 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-white/50">
+                  Privacy
+                </a>
               </div>
             </div>
           </nav>
         </header>
+        <PrivacyBanner />
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <DisclaimerBanner />
           {children}
