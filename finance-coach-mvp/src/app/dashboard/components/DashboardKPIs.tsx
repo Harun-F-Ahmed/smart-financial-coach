@@ -1,5 +1,7 @@
 'use client';
 
+import { formatCurrency, formatDelta } from '../../../lib/utils/formatting';
+
 interface KPIData {
   income: number;
   expenses: number;
@@ -13,20 +15,6 @@ interface DashboardKPIsProps {
 }
 
 export default function DashboardKPIs({ data, isLoading }: DashboardKPIsProps) {
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0
-    }).format(amount);
-  };
-
-  const formatDelta = (delta: number) => {
-    const isPositive = delta >= 0;
-    const sign = isPositive ? '+' : '';
-    return `${sign}${formatCurrency(delta)}`;
-  };
 
   if (isLoading) {
     return (

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import DisclaimerBanner from "../components/DisclaimerBanner";
 
 export const metadata: Metadata = {
   title: "Finance Coach MVP",
@@ -22,7 +23,7 @@ export default function RootLayout({
                   Finance Coach
                 </h1>
               </div>
-              <div className="flex items-center space-x-8">
+              <div className="flex items-center space-x-8" role="navigation" aria-label="Main navigation">
                 <a href="/dashboard" className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">
                   Dashboard
                 </a>
@@ -40,6 +41,7 @@ export default function RootLayout({
           </nav>
         </header>
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <DisclaimerBanner />
           {children}
         </main>
       </body>

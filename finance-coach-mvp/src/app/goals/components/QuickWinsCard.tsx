@@ -1,5 +1,7 @@
 'use client';
 
+import { formatCurrency } from '../../../lib/utils/formatting';
+
 interface QuickWin {
   label: string;
   save: number;
@@ -10,14 +12,6 @@ interface QuickWinsCardProps {
 }
 
 export default function QuickWinsCard({ cancelSubscriptions }: QuickWinsCardProps) {
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0
-    }).format(amount);
-  };
 
   if (cancelSubscriptions.length === 0) {
     return null;

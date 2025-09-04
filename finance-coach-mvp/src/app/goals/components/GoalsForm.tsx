@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { formatCurrency } from '../../../lib/utils/formatting';
 
 interface GoalsFormProps {
   onSubmit: (data: { targetAmount: number; months: number }) => void;
@@ -110,15 +111,10 @@ export default function GoalsForm({ onSubmit, isLoading }: GoalsFormProps) {
            Object.keys(errors).length === 0;
   };
 
-  const formatCurrency = (value: string) => {
+  const formatCurrencyInput = (value: string) => {
     const num = parseFloat(value);
     if (isNaN(num)) return value;
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0
-    }).format(num);
+    return formatCurrency(num);
   };
 
   return (

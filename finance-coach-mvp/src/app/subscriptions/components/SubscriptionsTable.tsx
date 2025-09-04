@@ -1,6 +1,9 @@
 'use client';
 
 import { useState } from 'react';
+import { formatCurrency } from '../../../lib/utils/formatting';
+import { formatDate } from '../../../lib/utils/date';
+import { getConfidenceColor, getConfidenceLabel } from '../../../lib/utils/insights';
 
 interface Subscription {
   merchant: string;
@@ -31,34 +34,6 @@ export default function SubscriptionsTable({ subscriptions, isLoading }: Subscri
   const [sortField, setSortField] = useState<SortField>('monthlyEstimate');
   const [sortDirection, setSortDirection] = useState<SortDirection>('desc');
 
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    }).format(amount);
-  };
-
-  const formatDate = (dateStr: string) => {
-    return new Date(dateStr).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric'
-    });
-  };
-
-  const getConfidenceColor = (confidence: number) => {
-    if (confidence >= 0.8) return 'bg-green-500';
-    if (confidence >= 0.6) return 'bg-yellow-500';
-    return 'bg-red-500';
-  };
-
-  const getConfidenceLabel = (confidence: number) => {
-    if (confidence >= 0.8) return 'High';
-    if (confidence >= 0.6) return 'Medium';
-    return 'Low';
-  };
 
   const handleSort = (field: SortField) => {
     if (sortField === field) {

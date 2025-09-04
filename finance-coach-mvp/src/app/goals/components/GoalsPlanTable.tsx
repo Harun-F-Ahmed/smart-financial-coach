@@ -1,5 +1,7 @@
 'use client';
 
+import { formatCurrency } from '../../../lib/utils/formatting';
+
 interface PlanItem {
   category: string;
   proposedCut: number;
@@ -13,14 +15,6 @@ interface GoalsPlanTableProps {
 }
 
 export default function GoalsPlanTable({ plan, shortfall }: GoalsPlanTableProps) {
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0
-    }).format(amount);
-  };
 
   const totalProposedSavings = plan.reduce((sum, item) => sum + item.proposedCut, 0);
 

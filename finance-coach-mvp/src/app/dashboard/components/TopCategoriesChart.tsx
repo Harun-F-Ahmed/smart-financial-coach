@@ -1,5 +1,7 @@
 'use client';
 
+import { formatCurrency } from '../../../lib/utils/formatting';
+
 interface CategoryData {
   category: string;
   total: number;
@@ -11,14 +13,6 @@ interface TopCategoriesChartProps {
 }
 
 export default function TopCategoriesChart({ data, isLoading }: TopCategoriesChartProps) {
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0
-    }).format(amount);
-  };
 
   if (isLoading) {
     return (

@@ -1,5 +1,7 @@
 'use client';
 
+import { formatCurrency } from '../../../lib/utils/formatting';
+
 interface InsightsSummaryProps {
   txCount: number;
   totalExpenses: number;
@@ -15,14 +17,6 @@ export default function InsightsSummary({
   generated,
   returned
 }: InsightsSummaryProps) {
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0
-    }).format(amount);
-  };
 
   const discretionaryPercentage = totalExpenses > 0 
     ? Math.round((discretionaryExpenses / totalExpenses) * 100)

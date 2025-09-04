@@ -1,5 +1,7 @@
 'use client';
 
+import { formatCurrency } from '../../../lib/utils/formatting';
+
 interface Forecast {
   method: 'mean' | 'regression' | 'expSmooth';
   savings: number;
@@ -14,14 +16,6 @@ interface GoalsSummaryProps {
 }
 
 export default function GoalsSummary({ onTrack, monthlyTarget, forecast }: GoalsSummaryProps) {
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0
-    }).format(amount);
-  };
 
   const getMethodLabel = (method: string) => {
     switch (method) {

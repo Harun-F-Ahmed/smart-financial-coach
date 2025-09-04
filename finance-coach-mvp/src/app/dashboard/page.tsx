@@ -5,6 +5,7 @@ import MonthSelector from './components/MonthSelector';
 import DashboardKPIs from './components/DashboardKPIs';
 import DailySpendChart from './components/DailySpendChart';
 import TopCategoriesChart from './components/TopCategoriesChart';
+import { getPreviousMonth } from '../../lib/utils/date';
 
 interface Transaction {
   id: string;
@@ -88,16 +89,6 @@ export default function DashboardPage() {
     }
   };
 
-  const getPreviousMonth = (year: string, month: string) => {
-    const yearNum = parseInt(year);
-    const monthNum = parseInt(month);
-    
-    if (monthNum === 1) {
-      return `${yearNum - 1}-12`;
-    } else {
-      return `${yearNum}-${(monthNum - 1).toString().padStart(2, '0')}`;
-    }
-  };
 
   const handleRetry = () => {
     fetchData();

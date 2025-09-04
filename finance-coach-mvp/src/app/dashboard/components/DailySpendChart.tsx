@@ -1,5 +1,8 @@
 'use client';
 
+import { formatCurrency } from '../../../lib/utils/formatting';
+import { formatDateShort } from '../../../lib/utils/date';
+
 interface DailySpendData {
   date: string;
   spend: number;
@@ -11,21 +14,6 @@ interface DailySpendChartProps {
 }
 
 export default function DailySpendChart({ data, isLoading }: DailySpendChartProps) {
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0
-    }).format(amount);
-  };
-
-  const formatDate = (dateStr: string) => {
-    return new Date(dateStr).toLocaleDateString('en-US', {
-      month: 'short',
-      day: 'numeric'
-    });
-  };
 
   if (isLoading) {
     return (
@@ -122,7 +110,7 @@ export default function DailySpendChart({ data, isLoading }: DailySpendChartProp
           <div className="flex justify-between mt-2 text-xs text-gray-500">
             {data.map((d, i) => (
               <span key={i} className="text-center">
-                {formatDate(d.date)}
+                {formatDateShort(d.date)}
               </span>
             ))}
           </div>
