@@ -126,9 +126,11 @@ export async function GET(request: NextRequest): Promise<NextResponse<Subscripti
     }
 
     // Group transactions by merchant and amount (within tolerance)
+    // Only consider expense transactions (negative amounts) for subscription detection
+    const expenseTransactions = transactions.filter(t => t.amount < 0);
     const groups: TransactionGroup[] = [];
     
-    for (const transaction of transactions) {
+    for (const transaction of expenseTransactions) {
       let addedToGroup = false;
       
       // Try to find an existing group for this merchant+amount combination
