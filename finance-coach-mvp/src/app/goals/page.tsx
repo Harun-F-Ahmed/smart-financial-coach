@@ -1,17 +1,90 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import GoalsForm from './components/GoalsForm';
+import GoalsSummary from './components/GoalsSummary';
+import GoalsPlanTable from './components/GoalsPlanTable';
+import QuickWinsCard from './components/QuickWinsCard';
+
+interface GoalsResponse {
+  onTrack: boolean;
+  monthlyTarget: number;
+  forecast: {
+    method: 'mean' | 'regression' | 'expSmooth';
+    savings: number;
+    interval: { low: number; high: number };
+    probabilityOnTrack: number;
+  };
+  shortfall: number;
+  plan: Array<{
+    category: string;
+    proposedCut: number;
+    rationale: string;
+    microActions: string[];
+  }>;
+  alternatives: {
+    cancelSubscriptions: Array<{ label: string; save: number }>;
+  };
+  meta: {
+    monthsAnalyzed: number;
+    methodTried: string[];
+    chosen: string;
+    debug?: any;
+  };
+}
 
 export default function GoalsPage() {
-  const [targetAmount, setTargetAmount] = useState('');
-  const [months, setMonths] = useState('');
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [result, setResult] = useState<GoalsResponse | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [debugMode, setDebugMode] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (targetAmount && months) {
-      setIsSubmitted(true);
+  // Check for debug mode in URL
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    setDebugMode(urlParams.get('debug') === '1');
+  }, []);
+
+  const handleSubmit = async (data: { targetAmount: number; months: number }) => {
+    setIsLoading(true);
+    setError(null);
+    setResult(null);
+
+    try {
+      const payload: any = {
+        targetAmount: data.targetAmount,
+        months: data.months
+      };
+
+      if (debugMode) {
+        payload.extras = 'debug';
+      }
+
+      const response = await fetch('/api/goals', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.hint || errorData.error || 'Failed to analyze goal');
+      }
+
+      const resultData: GoalsResponse = await response.json();
+      setResult(resultData);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An unexpected error occurred');
+    } finally {
+      setIsLoading(false);
     }
+  };
+
+  const handleRetry = () => {
+    setError(null);
+    setResult(null);
   };
 
   return (
@@ -25,104 +98,83 @@ export default function GoalsPage() {
         {/* Goal Form */}
         <div className="bg-white rounded-lg shadow p-6">
           <h3 className="text-lg font-medium text-gray-900 mb-4">Set Your Goal</h3>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label htmlFor="targetAmount" className="block text-sm font-medium text-gray-700 mb-2">
-                Target Amount ($)
-              </label>
-              <input
-                type="number"
-                id="targetAmount"
-                value={targetAmount}
-                onChange={(e) => setTargetAmount(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="5000"
-                min="1"
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="months" className="block text-sm font-medium text-gray-700 mb-2">
-                Timeline (months)
-              </label>
-              <input
-                type="number"
-                id="months"
-                value={months}
-                onChange={(e) => setMonths(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="12"
-                min="1"
-                max="120"
-                required
-              />
-            </div>
-            <button
-              type="submit"
-              className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-            >
-              Analyze Goal
-            </button>
-          </form>
+          <GoalsForm onSubmit={handleSubmit} isLoading={isLoading} />
         </div>
 
         {/* Results Area */}
         <div className="bg-white rounded-lg shadow p-6">
           <h3 className="text-lg font-medium text-gray-900 mb-4">Goal Analysis</h3>
           
-          {!isSubmitted ? (
+          {isLoading && (
+            <div className="text-center py-12">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+              <p className="text-gray-500">Analyzing your goal...</p>
+            </div>
+          )}
+
+          {error && (
+            <div className="text-center py-12">
+              <div className="mx-auto w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mb-4">
+                <svg className="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h4 className="text-lg font-medium text-gray-900 mb-2">Analysis Failed</h4>
+              <p className="text-gray-500 mb-4">{error}</p>
+              <button
+                onClick={handleRetry}
+                className="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+              >
+                Try Again
+              </button>
+            </div>
+          )}
+
+          {!isLoading && !error && !result && (
             <div className="text-center py-12">
               <svg className="mx-auto w-12 h-12 text-gray-300 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
               </svg>
               <p className="text-gray-500">Enter your goal details to see the analysis</p>
             </div>
-          ) : (
-            <div className="space-y-4">
-              {/* On Track Status */}
-              <div className="p-4 bg-yellow-50 border border-yellow-200 rounded-md">
-                <div className="flex items-center">
-                  <div className="flex-shrink-0">
-                    <svg className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                  <div className="ml-3">
-                    <h4 className="text-sm font-medium text-yellow-800">Goal Status</h4>
-                    <p className="text-sm text-yellow-700">Currently not on track</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Required Monthly Savings */}
-              <div className="p-4 bg-gray-50 rounded-md">
-                <h4 className="text-sm font-medium text-gray-700 mb-2">Required Monthly Savings</h4>
-                <p className="text-2xl font-semibold text-gray-900">
-                  ${targetAmount && months ? (parseFloat(targetAmount) / parseFloat(months)).toFixed(2) : '0'}
-                </p>
-              </div>
-
-              {/* Suggestions */}
-              <div className="p-4 bg-blue-50 border border-blue-200 rounded-md">
-                <h4 className="text-sm font-medium text-blue-800 mb-2">Suggested Cuts</h4>
-                <div className="space-y-2 text-sm text-blue-700">
-                  <p>• Reduce coffee spending by $50/month</p>
-                  <p>• Cut restaurant expenses by $100/month</p>
-                  <p>• Review subscription services</p>
-                </div>
-              </div>
-            </div>
           )}
         </div>
       </div>
 
-      {/* Progress Visualization */}
-      <div className="bg-white rounded-lg shadow p-6">
-        <h3 className="text-lg font-medium text-gray-900 mb-4">Progress Visualization</h3>
-        <div className="h-32 bg-gray-50 rounded-lg border-2 border-dashed border-gray-300 flex items-center justify-center">
-          <p className="text-gray-500">Progress chart will be displayed here</p>
+      {/* Results */}
+      {result && (
+        <div className="space-y-6">
+          {/* Summary */}
+          <GoalsSummary
+            onTrack={result.onTrack}
+            monthlyTarget={result.monthlyTarget}
+            forecast={result.forecast}
+          />
+
+          {/* Cut Plan or Efficiency Ideas */}
+          <GoalsPlanTable
+            plan={result.plan}
+            shortfall={result.shortfall}
+          />
+
+          {/* Quick Wins */}
+          {result.alternatives.cancelSubscriptions.length > 0 && (
+            <QuickWinsCard
+              cancelSubscriptions={result.alternatives.cancelSubscriptions}
+            />
+          )}
+
+          {/* Debug Info */}
+          {debugMode && result.meta.debug && (
+            <div className="bg-gray-50 rounded-lg p-6">
+              <h3 className="text-lg font-medium text-gray-900 mb-4">Debug Information</h3>
+              <pre className="text-xs text-gray-600 overflow-auto">
+                {JSON.stringify(result.meta.debug, null, 2)}
+              </pre>
+            </div>
+          )}
         </div>
-      </div>
+      )}
     </div>
   );
 }
