@@ -1,6 +1,8 @@
 'use client';
 
 import { formatCurrency } from '../../../lib/utils/formatting';
+import { motion } from 'framer-motion';
+import { PieChart } from 'lucide-react';
 
 interface CategoryData {
   category: string;
@@ -16,8 +18,15 @@ export default function TopCategoriesChart({ data, isLoading }: TopCategoriesCha
 
   if (isLoading) {
     return (
-      <div className="bg-white rounded-lg shadow p-6">
-        <h3 className="text-lg font-medium text-gray-900 mb-4">Top Categories</h3>
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="glass rounded-xl p-6"
+      >
+        <div className="flex items-center mb-4">
+          <PieChart className="w-5 h-5 text-purple-500 mr-2" />
+          <h3 className="text-lg font-semibold text-gray-900">Top Categories</h3>
+        </div>
         <div className="animate-pulse space-y-3">
           {[...Array(5)].map((_, i) => (
             <div key={i} className="flex items-center space-x-3">
@@ -27,23 +36,28 @@ export default function TopCategoriesChart({ data, isLoading }: TopCategoriesCha
             </div>
           ))}
         </div>
-      </div>
+      </motion.div>
     );
   }
 
   if (data.length === 0) {
     return (
-      <div className="bg-white rounded-lg shadow p-6">
-        <h3 className="text-lg font-medium text-gray-900 mb-4">Top Categories</h3>
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="glass rounded-xl p-6"
+      >
+        <div className="flex items-center mb-4">
+          <PieChart className="w-5 h-5 text-purple-500 mr-2" />
+          <h3 className="text-lg font-semibold text-gray-900">Top Categories</h3>
+        </div>
         <div className="h-48 flex items-center justify-center text-gray-500">
           <div className="text-center">
-            <svg className="w-12 h-12 text-gray-300 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-            </svg>
+            <PieChart className="w-12 h-12 text-gray-300 mx-auto mb-2" />
             <p>No category data for this month</p>
           </div>
         </div>
-      </div>
+      </motion.div>
     );
   }
 
@@ -61,47 +75,66 @@ export default function TopCategoriesChart({ data, isLoading }: TopCategoriesCha
   ];
 
   return (
-    <div className="bg-white rounded-lg shadow p-6">
-      <h3 className="text-lg font-medium text-gray-900 mb-4">Top Categories</h3>
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.1 }}
+      className="glass rounded-xl p-6"
+    >
+      <div className="flex items-center mb-6">
+        <PieChart className="w-5 h-5 text-purple-500 mr-2" />
+        <h3 className="text-lg font-semibold text-gray-900">Top Categories</h3>
+      </div>
       
-      <div className="space-y-3">
+      <div className="space-y-4">
         {topCategories.map((category, index) => {
           const percentage = (category.total / maxAmount) * 100;
           const color = colors[index % colors.length];
           
           return (
-            <div key={category.category} className="flex items-center space-x-3">
-              <div className="w-20 text-sm text-gray-600 truncate">
-                {category.category}
+            <motion.div 
+              key={category.category} 
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.3, delay: index * 0.1 }}
+              className="flex items-center space-x-4 p-3 rounded-lg hover:bg-white/30 transition-colors"
+            >
+              <div className="w-6 h-6 rounded-full flex items-center justify-center text-white text-xs font-bold" style={{ backgroundColor: color }}>
+                {index + 1}
               </div>
-              <div className="flex-1">
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center justify-between mb-1">
+                  <span className="text-sm font-medium text-gray-900 truncate">
+                    {category.category}
+                  </span>
+                  <span className="text-sm font-bold text-gray-900">
+                    {formatCurrency(category.total)}
+                  </span>
+                </div>
                 <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div
-                    className="h-2 rounded-full transition-all duration-300"
-                    style={{
-                      width: `${percentage}%`,
-                      backgroundColor: color
-                    }}
+                  <motion.div
+                    initial={{ width: 0 }}
+                    animate={{ width: `${percentage}%` }}
+                    transition={{ duration: 0.8, delay: index * 0.1 }}
+                    className="h-2 rounded-full"
+                    style={{ backgroundColor: color }}
                   />
                 </div>
               </div>
-              <div className="w-20 text-sm font-medium text-gray-900 text-right">
-                {formatCurrency(category.total)}
-              </div>
-            </div>
+            </motion.div>
           );
         })}
       </div>
       
       {/* Summary */}
-      <div className="mt-4 pt-4 border-t border-gray-200">
-        <div className="flex justify-between text-sm">
-          <span className="text-gray-500">Total of top 5:</span>
-          <span className="font-medium text-gray-900">
+      <div className="mt-6 pt-4 border-t border-gray-200">
+        <div className="flex justify-between items-center">
+          <span className="text-sm text-gray-600">Total of top 5:</span>
+          <span className="text-lg font-bold text-gray-900">
             {formatCurrency(topCategories.reduce((sum, c) => sum + c.total, 0))}
           </span>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

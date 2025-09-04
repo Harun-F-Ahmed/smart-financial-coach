@@ -2,6 +2,9 @@
 
 import { formatCurrency } from '../../../lib/utils/formatting';
 import { formatDateShort } from '../../../lib/utils/date';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { motion } from 'framer-motion';
+import { TrendingUp, BarChart3 } from 'lucide-react';
 
 interface DailySpendData {
   date: string;
@@ -17,121 +20,127 @@ export default function DailySpendChart({ data, isLoading }: DailySpendChartProp
 
   if (isLoading) {
     return (
-      <div className="bg-white rounded-lg shadow p-6">
-        <h3 className="text-lg font-medium text-gray-900 mb-4">Daily Spending</h3>
-        <div className="animate-pulse">
-          <div className="h-64 bg-gray-200 rounded"></div>
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="glass rounded-xl p-6"
+      >
+        <div className="flex items-center mb-4">
+          <BarChart3 className="w-5 h-5 text-blue-500 mr-2" />
+          <h3 className="text-lg font-semibold text-gray-900">Daily Spending</h3>
         </div>
-      </div>
+        <div className="animate-pulse">
+          <div className="h-64 bg-gray-200 rounded-lg"></div>
+        </div>
+      </motion.div>
     );
   }
 
   if (data.length === 0) {
     return (
-      <div className="bg-white rounded-lg shadow p-6">
-        <h3 className="text-lg font-medium text-gray-900 mb-4">Daily Spending</h3>
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="glass rounded-xl p-6"
+      >
+        <div className="flex items-center mb-4">
+          <BarChart3 className="w-5 h-5 text-blue-500 mr-2" />
+          <h3 className="text-lg font-semibold text-gray-900">Daily Spending</h3>
+        </div>
         <div className="h-64 flex items-center justify-center text-gray-500">
           <div className="text-center">
-            <svg className="w-12 h-12 text-gray-300 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-            </svg>
+            <BarChart3 className="w-12 h-12 text-gray-300 mx-auto mb-2" />
             <p>No spending data for this month</p>
           </div>
         </div>
-      </div>
+      </motion.div>
     );
   }
 
-  // Calculate chart dimensions and scaling
+  const chartData = data.map(d => ({
+    ...d,
+    formattedDate: formatDateShort(d.date)
+  }));
+
+  const totalSpend = data.reduce((sum, d) => sum + d.spend, 0);
+  const averageSpend = totalSpend / data.length;
   const maxSpend = Math.max(...data.map(d => d.spend));
-  const chartHeight = 200;
-  const chartWidth = Math.max(400, data.length * 20);
+
+  const CustomTooltip = ({ active, payload, label }: any) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="bg-white p-3 rounded-lg shadow-lg border border-gray-200">
+          <p className="text-sm font-medium text-gray-900">{label}</p>
+          <p className="text-sm text-blue-600">
+            {formatCurrency(payload[0].value)}
+          </p>
+        </div>
+      );
+    }
+    return null;
+  };
 
   return (
-    <div className="bg-white rounded-lg shadow p-6">
-      <h3 className="text-lg font-medium text-gray-900 mb-4">Daily Spending</h3>
-      
-      <div className="overflow-x-auto">
-        <div className="min-w-full" style={{ width: `${chartWidth}px` }}>
-          <svg height={chartHeight} width="100%" className="w-full">
-            {/* Grid lines */}
-            {[0, 0.25, 0.5, 0.75, 1].map((ratio, i) => (
-              <g key={i}>
-                <line
-                  x1="0"
-                  y1={chartHeight * ratio}
-                  x2="100%"
-                  y2={chartHeight * ratio}
-                  stroke="#f3f4f6"
-                  strokeWidth="1"
-                />
-                <text
-                  x="0"
-                  y={chartHeight * ratio - 5}
-                  fontSize="12"
-                  fill="#6b7280"
-                  textAnchor="start"
-                >
-                  {formatCurrency(maxSpend * (1 - ratio))}
-                </text>
-              </g>
-            ))}
-            
-            {/* Data line */}
-            <polyline
-              fill="none"
-              stroke="#3b82f6"
-              strokeWidth="2"
-              points={data.map((d, i) => {
-                const x = (i / (data.length - 1)) * 100;
-                const y = chartHeight - (d.spend / maxSpend) * chartHeight;
-                return `${x}%,${y}`;
-              }).join(' ')}
-            />
-            
-            {/* Data points */}
-            {data.map((d, i) => {
-              const x = (i / (data.length - 1)) * 100;
-              const y = chartHeight - (d.spend / maxSpend) * chartHeight;
-              return (
-                <circle
-                  key={i}
-                  cx={`${x}%`}
-                  cy={y}
-                  r="3"
-                  fill="#3b82f6"
-                  className="hover:r-4 transition-all"
-                />
-              );
-            })}
-          </svg>
-          
-          {/* X-axis labels */}
-          <div className="flex justify-between mt-2 text-xs text-gray-500">
-            {data.map((d, i) => (
-              <span key={i} className="text-center">
-                {formatDateShort(d.date)}
-              </span>
-            ))}
-          </div>
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="glass rounded-xl p-6"
+    >
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center">
+          <BarChart3 className="w-5 h-5 text-blue-500 mr-2" />
+          <h3 className="text-lg font-semibold text-gray-900">Daily Spending</h3>
         </div>
+        <TrendingUp className="w-5 h-5 text-emerald-500" />
+      </div>
+      
+      <div className="h-64 mb-6">
+        <ResponsiveContainer width="100%" height="100%">
+          <LineChart data={chartData}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
+            <XAxis 
+              dataKey="formattedDate" 
+              stroke="#64748b"
+              fontSize={12}
+              tickLine={false}
+              axisLine={false}
+            />
+            <YAxis 
+              stroke="#64748b"
+              fontSize={12}
+              tickLine={false}
+              axisLine={false}
+              tickFormatter={(value) => `$${value}`}
+            />
+            <Tooltip content={<CustomTooltip />} />
+            <Line 
+              type="monotone" 
+              dataKey="spend" 
+              stroke="#3b82f6" 
+              strokeWidth={3}
+              dot={{ fill: '#3b82f6', strokeWidth: 2, r: 4 }}
+              activeDot={{ r: 6, stroke: '#3b82f6', strokeWidth: 2 }}
+            />
+          </LineChart>
+        </ResponsiveContainer>
       </div>
       
       {/* Summary stats */}
-      <div className="mt-4 grid grid-cols-3 gap-4 text-center">
-        <div>
-          <p className="text-sm text-gray-500">Total</p>
-          <p className="font-semibold">{formatCurrency(data.reduce((sum, d) => sum + d.spend, 0))}</p>
+      <div className="grid grid-cols-3 gap-4">
+        <div className="text-center p-3 bg-white/50 rounded-lg">
+          <p className="text-sm text-gray-600 mb-1">Total</p>
+          <p className="text-lg font-bold text-gray-900">{formatCurrency(totalSpend)}</p>
         </div>
-        <div>
-          <p className="text-sm text-gray-500">Average</p>
-          <p className="font-semibold">{formatCurrency(data.reduce((sum, d) => sum + d.spend, 0) / data.length)}</p>
+        <div className="text-center p-3 bg-white/50 rounded-lg">
+          <p className="text-sm text-gray-600 mb-1">Average</p>
+          <p className="text-lg font-bold text-gray-900">{formatCurrency(averageSpend)}</p>
         </div>
-        <div>
-          <p className="text-sm text-gray-500">Peak</p>
-          <p className="font-semibold">{formatCurrency(maxSpend)}</p>
+        <div className="text-center p-3 bg-white/50 rounded-lg">
+          <p className="text-sm text-gray-600 mb-1">Peak</p>
+          <p className="text-lg font-bold text-gray-900">{formatCurrency(maxSpend)}</p>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
